@@ -43,6 +43,9 @@ class PrimaryExp extends AstExpression {
                 if (parser.isEnd()) {  // Opening parenthesis can't stay at the end of the string
                     throw new ExpressionFormatException("Wrong opening parenthesis detected");
                 }
+                else if (parser.getLast().equals(OPCODES[1])) {  // If next is ")" - exception
+                    throw new ExpressionFormatException("Empty parentheses detected");
+                }
                 // Parse subexpression from the top operations
                 res = LogicalExp.parseLogical(parser, true);
                 if (!parser.getLast().equals(OPCODES[1])) {  // If next is not ")" - exception
